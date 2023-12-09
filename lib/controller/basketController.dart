@@ -6,7 +6,6 @@ final BasketItemsList objList1 = BasketItemsList();
 
 class BasketController extends GetxController {
   BasketController({int? counter});
-
   double sum1 = objList1.sums();
   int increment() {
     counter++;
@@ -44,28 +43,35 @@ class BasketController extends GetxController {
   }
 
   //items.length  ==>  is the ;length of the list of items wich it will increase by clicking on (add to basket) in MEDICINE  PAGE
-// List<int> itemsQuantity=List<int>.filled(items.length, 1);
-  List<int> itemsQuantity = List<int>.generate(items.length, (ind) {
-    return 1;
+  List<Map<String, dynamic>> basketItemsPlaceOrderList =
+      List<Map<String, dynamic>>.generate(items.length, (ind) {
+    //items.length == the num of medcines in basket
+    return {
+      "medicine_id":1,
+      "quantity": 1,
+    };
   });
   void storeQuantityIncreament(int index, bool isLongPress) {
     isLongPress == false
-        ? itemsQuantity[index] += 1
-        : itemsQuantity[index] += 5;
-    // itemsQuantity.insert(index,value);
-    print(itemsQuantity);
+        ? basketItemsPlaceOrderList[index]["quantity"] += 1
+        : basketItemsPlaceOrderList[index]["quantity"] += 5;
+    print(basketItemsPlaceOrderList[index]);
   }
 
   void storeQuantityDeccreament(int index, bool isLongPress) {
     isLongPress == false
-        ? itemsQuantity[index] -= 1
-        : itemsQuantity[index] -= 5;
-    // itemsQuantity.insert(index,value);
-    print(itemsQuantity);
+        ? basketItemsPlaceOrderList[index]["quantity"] -= 1
+        : basketItemsPlaceOrderList[index]["quantity"] -= 5;
+    print(basketItemsPlaceOrderList);
   }
 
   void isDeleteClicked(int index1) {
-    itemsQuantity.removeAt(index1);
+    try{basketItemsPlaceOrderList.removeAt(index1);}
+    catch(e){
+      print(e);
+    }
   }
+
+
 
 }

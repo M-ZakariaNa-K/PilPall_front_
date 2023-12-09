@@ -9,8 +9,9 @@ import 'package:pharmacist_app/widgets/order_category.dart';
 class OldOrderDetailsView extends StatelessWidget {
   OldOrderDetailsView({
     super.key,
+    required this.orderId1
   });
-  // int index;
+   int orderId1;
   // OrderCategoryModel obj;
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class OldOrderDetailsView extends StatelessWidget {
         ),
         body: Column(
           children: [
-            const Expanded(child: OldOrderDetails()),
+            Expanded(child: OldOrderDetails(orderId: orderId1,)),
             Container(
                 margin: const EdgeInsets.symmetric(vertical: 30),
                 alignment: Alignment.centerLeft,
@@ -46,7 +47,7 @@ class OldOrderDetailsView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                      const  Text(
                           'Total price',
                           style: TextStyle(
                             fontSize: 13,
@@ -61,7 +62,7 @@ class OldOrderDetailsView extends StatelessWidget {
                               return Text(
                                 //'${controller.sum1} SYR',
                                 '${totalPriceOrderDetails}',
-                                style: TextStyle(
+                                style:const TextStyle(
                                   fontSize: 20,
                                   color: Colors.white,
                                   fontFamily: 'Open Sans',
@@ -70,8 +71,8 @@ class OldOrderDetailsView extends StatelessWidget {
                             })
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 10.0),
+                  const  Padding(
+                      padding:  EdgeInsets.only(right: 10.0),
                       child: Icon(
                         Icons.price_change,
                         color: Colors.white,

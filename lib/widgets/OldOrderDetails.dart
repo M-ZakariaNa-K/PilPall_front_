@@ -3,20 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:pharmacist_app/Models/OldOrderDetailsModel.dart';
 import 'package:pharmacist_app/services/GetShowOrderDetails1.dart';
 import 'package:pharmacist_app/widgets/basket_item_lists.dart';
+import 'package:pharmacist_app/widgets/order_category.dart';
 
 int numOfItems = 0;
 
 class OldOrderDetails extends StatelessWidget {
-  const OldOrderDetails({super.key});
-
+  OldOrderDetails({super.key, required this.orderId});
+  int orderId;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: GetShowOrderDetails().getShowOrderDetails(
-          url: 'http://10.0.2.2:8000/api/orders/detail?order_id=1h',
-            token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI3IiwianRpIjoiOTNiYTkzMTcwMjY5MGUxOWZiY2JlYTY1MTFiNzI5ODZmZmEwM2RmZDE5ZmZmZDk4NTc1NWM1NDc4ZjFmYWZlMWVkN2IyZmJmZDBmYThjOGQiLCJpYXQiOjE3MDE4NTgyMzcuODIzNDA1LCJuYmYiOjE3MDE4NTgyMzcuODIzNDA5LCJleHAiOjE3MzM0ODA2MzcuNjk4ODksInN1YiI6IjEwIiwic2NvcGVzIjpbXX0.Ojtc79h_mJMwNRIzdKv439yLfVT7h0xnxnrqbi3u1rab5S7SOU5SYmZgA6Kl4wdj19xMGpxr4Kn92KfMoAYxdusLgJ5_FXMwdfAfQULa4AeIpzD58YRh2JsvmBFykZKz3VswqGhbrBWUjxF02X7urYt00CIPA7gFoTMD-1wPBwrsktEhmBcez_6nTRoYcGSn4oqFLHNt8HsK4f_e5rz3RKmqsgX_2mSJQ8undStEyJ2QGN_FVh3cYYgPX7LrNpbWip00cZLz4Tsif2qfS0GCNYhWwKy3Xo8ABoYalTZ4pnMqrkfZVJORkpV1Xb3vSFrlwri_0gZFb-FOWYhTNf0KdZjsDe4j1Q0TE5IHiX5m-HjcX1bSWCpR0LqeZLFYk9ahWPHbjSa7oXV7nV6byp87cyh9wtr0e1MN2NK1TsEXewjftC4brJpcIA6Uvo1SZsUAGWwKHEMY4dZKns962GzMUpCeWX39CV4xhlXTPc6wKlw-LXSg3h92PPa5RS5gBMfDfaFQzvdjVTynnwyWh2q1CeXLOMZMd5W0a6hSNXNp1HNEDWzc6gRhxAMNVal-jXqbHF62d6CZvNPzTlkfyh1N26PE-Ufod_B13MRJxZszamBQjT-MVALAV7pYSGU-0Q5Lr2hUEcRIQCZSJkHauvtV3zeC_yawA3j1PEqHuYxFnnA',),
+          orderId: orderId, //I define it in order category
+          url: 'http://10.0.2.2:8000/api/orders/detail?order_id=54',
+          //id:idOrderDetails,
+          token:
+              'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5IiwianRpIjoiMjAxNTJkN2ExYjZjZWYyOWM2MjZhMjhhYmU1ZWFkMjg3ODY5MjIwY2U4OWFlOTVlYmI3MDhiZWRmZDIwMmUxNWVmNTNlZjg5YmRlZDRjNTkiLCJpYXQiOjE3MDE5ODYyNzguNzk5NzY2LCJuYmYiOjE3MDE5ODYyNzguNzk5NzY5LCJleHAiOjE3MzM2MDg2NzguNzgyMjE3LCJzdWIiOiI1Iiwic2NvcGVzIjpbXX0.waB1tDS030LWB3piHSGqvI2rmqmFPRsFjR2xeBNGk5WdVWZtbzkNMyMCXmIS0wZmxO7jex7K3ooF26AVXs-j58A5zvnhnkifHXuayzmJpIql1RscOLaB0lfb-Qn3ZlMTirkDkz0vcpD-taaEPmcKS2pWElkQOpCqoULuCSAF_v6oTJRphGxgTbVl30H0lkGwe8-_HVYkeS-ePJU4Lupw4mim9PV_QB6R1neGE82LTLjU4dINr3yVDgjnf1NGCDQTe9NopBTjGM7y1TtGZa5aSChD2YUx4ixwuruEYEbE9jWOF0xzx8Sbo7TvIz4a9rtKKEvaZM_WNjbM98lkQB_dq2XHSyU-yNSJIsna7JHKYAW2FEskV3iKK1N224upPZfXT5tCgcoNOhqHhujj-h2tjBaDaO2-OxunDePW68Il447GAlsIiiP0xxHKphM0hBADxjrgdtG6aFrDmE8GSIMnK5g4-X-Z0HbUJy7U8sglDP9A2oHZJNywx9haPHCFleIXeew_xZNtnyECZdd-cGDSYDNkf2zO1eFPFU7LbHGdQL1xpDdFDyCgAlO7fZnSpWN0f8Zhs0OC6nijjRkZbpQKnfjFZqMMqOuMg56pDKmy6DqOFPN56g0tUH0DV3cCxUe67BjSu_gaO63r_sPRn6-YRHCDzeYuknfP2EedHN1-YKM',
+        ),
         builder: (context, snapshot) {
-          print(snapshot);
           if (snapshot.hasData) {
             dynamic temp = snapshot.data;
 
@@ -24,10 +28,10 @@ class OldOrderDetails extends StatelessWidget {
             List<Medicine> data = temp;
             numOfItems = data.length;
             return DefaultTabController(
-              length: data.length,
+              length: 1,
               child: TabBarView(
                 children: List.generate(
-                  data.length,
+                  1,
                   (index) => ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (context, ind) => Column(

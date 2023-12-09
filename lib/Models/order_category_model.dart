@@ -2,10 +2,10 @@
 class OrderCategoryModel {
   final int id;
   final int? userId;
-  final String? orderDate;
+  final String orderDate;
   final int? payedStatus;
-  final String? orderStatus;
-  final double? price;
+  final String orderStatus;
+  final double price;
   const OrderCategoryModel({
     required this.id,
     required this.userId,

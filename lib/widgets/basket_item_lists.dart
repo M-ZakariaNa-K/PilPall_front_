@@ -13,42 +13,42 @@ List<BasketItemModel> items = [
   ),
   BasketItemModel(
     name: 'Paracetamol', quantityPrice: 10500,
-    image: 'http://10.0.2.2:8000/storage/photo_2022-04-26_14-07-49.jpg',
+    image: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     //the Amount of every drug. it will come from API.
     amount: 0,
     counter: 1,
   ),
   BasketItemModel(
     name: 'Paracetamol', quantityPrice: 10500,
-    image: 'http://10.0.2.2:8000/storage/photo_2022-04-26_14-07-49.jpg',
+    image: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     //the Amount of every drug. it will come from API.
     amount: 0,
     counter: 1,
   ),
   BasketItemModel(
     name: 'Paracetamol', quantityPrice: 10500,
-    image: 'http://10.0.2.2:8000/storage/photo_2022-04-26_14-07-49.jpg',
+    image: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     //the Amount of every drug. it will come from API.
     amount: 0,
     counter: 1,
   ),
   BasketItemModel(
     name: 'Paracetamol', quantityPrice: 10500,
-    image: 'http://10.0.2.2:8000/storage/photo_2022-04-26_14-07-49.jpg',
+    image: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     //the Amount of every drug. it will come from API.
     amount: 0,
     counter: 1,
   ),
   BasketItemModel(
     name: 'Paracetamol', quantityPrice: 10500,
-    image: 'http://10.0.2.2:8000/storage/photo_2022-04-26_14-07-49.jpg',
+    image: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     //the Amount of every drug. it will come from API.
     amount: 0,
     counter: 1,
   ),
   BasketItemModel(
     name: 'Paracetamol', quantityPrice: 10500,
-    image: 'http://10.0.2.2:8000/storage/photo_2022-04-26_14-07-49.jpg',
+    image: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     //the Amount of every drug. it will come from API.
     amount: 0,
     counter: 1,

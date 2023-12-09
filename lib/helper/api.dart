@@ -20,6 +20,7 @@ class Api {
     var data = json.decode(response.body);
     //dyn amic data= json.decode(response.body);
     // return response.body;
+
     if (response.statusCode == 200) {
       return data;
     } else {
@@ -56,18 +57,18 @@ class Api {
   }
 
   //Delete
-  delete({required var url1, required String token, required int orderId}) async {
-    var url = Uri.parse(url1);
-    var response =
-        await http.delete(url, headers: {'Authorization': 'Barer $token'});
-    if (response.statusCode == 200) {
-      print('Order deleted successfully');
-    } else {
-      print('Failed to delete order. Status Code: ${response.statusCode}');
-      print('Response Body: ${response.body}');
-    }
-    //i call it in onPressed the Cansel button
-  }
+//   delete({required var url1, required String token, required int orderId}) async {
+//     var url = Uri.parse(url1);
+//     var response =
+//         await http.delete(url, headers: {'Authorization': 'Barer $token'});
+//     if (response.statusCode == 200) {
+//       print('Order deleted successfully');
+//     } else {
+//       print('Failed to delete order. Status Code: ${response.statusCode}');
+//       print('Response Body: ${response.body}');
+//     }
+//     //i call it in onPressed the Cansel button
+//   }
 }
 
 //                 TO Save TOOKEN

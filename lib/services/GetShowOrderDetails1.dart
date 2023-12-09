@@ -4,7 +4,7 @@ import 'package:pharmacist_app/helper/api.dart';
 
 //Successful Show Order Details
 class GetShowOrderDetails {
-  Future<List<Medicine>> getShowOrderDetails({required String token, required String url}) async {
+  Future<List<Medicine>> getShowOrderDetails({required String token, required String url,required int orderId}) async {
     Map<String,dynamic> data = await Api().get(url: url,token: token);
    //if (http://127.0.0.1:8000) not work use (http://10.0.2.2:8000)
     List<Medicine> oldOrderDetailsList = [];
