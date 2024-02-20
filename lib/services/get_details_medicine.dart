@@ -1,14 +1,19 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pharmacist_app/Models/get_medicine_details_model.dart';
+import 'package:pharmacist_app/helper/varibles.dart';
 
 class AllDetailsMedicineService {
-  Future<List<MedicineDetailsModel>> getAllDetailsMedicineService(
-      {required String? token, required int MedicineId}) async {
+  Future<List<MedicineDetailsModel>> getAllDetailsMedicineService({
+    required String? token,
+    required int MedicineId,
+  }) async {
     http.Response response = await http.get(
         Uri.parse(
-            'http://10.0.2.2:8000/api/medicines/detail?medicine_id=$MedicineId'),
-        headers: {"Authorization": 'Bearer $token'});
+            '$projectUrlVar/api/medicines/detail?medicine_id=$MedicineId'),
+        headers: {"Authorization": 'Bearer $token', 'Str': '$strVar'});
+    print("Im medicines details : ${response.body}");
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
       List<MedicineDetailsModel> companyList = [];
@@ -17,6 +22,7 @@ class AllDetailsMedicineService {
           MedicineDetailsModel.fromJson(data['data'][i]),
         );
       }
+      print("im details: $companyList");
       return companyList;
     } else {
       throw Exception(

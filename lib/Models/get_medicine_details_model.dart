@@ -7,7 +7,7 @@ class MedicineDetailsModel {
   final String scientificName;
   final String commercialName;
   final int quantity;
-  final double price;
+  final num price;
   final String expirationDate;
   final String image;
   final Companys company;

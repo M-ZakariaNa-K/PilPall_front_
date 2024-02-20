@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacist_app/Models/order_category_model.dart';
-import 'package:pharmacist_app/helper/api.dart';
-import 'package:pharmacist_app/services/DeleteOrderService.dart';
-import 'package:pharmacist_app/services/GetShowOrder1.dart';
+import 'package:pharmacist_app/helper/varibles.dart';
+import 'package:pharmacist_app/services/Orders/DeleteOrderService.dart';
+import 'package:pharmacist_app/services/Orders/GetShowOrder1.dart';
 import 'package:pharmacist_app/views/OldOrderDetailsView.dart';
 
 int confirmDeleteId = 0;
 //public
 List<OrderCategoryModel> dataController =
     []; //to store all data from api and take the length of it to make controller
-double? totalPriceOrderDetails = 0;
+num totalPriceOrderDetails = 0;
 int idOrderDetails = 0;
 //to store the list of model and know if it's empty to print('There is no order') on screen
 int orderCategoryDataLength = 0;
@@ -32,8 +32,9 @@ class _OrderCategoryState extends State<OrderCategory> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: GetShowOrder1().getShowOrder(
-            token:
-                'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5IiwianRpIjoiMjAxNTJkN2ExYjZjZWYyOWM2MjZhMjhhYmU1ZWFkMjg3ODY5MjIwY2U4OWFlOTVlYmI3MDhiZWRmZDIwMmUxNWVmNTNlZjg5YmRlZDRjNTkiLCJpYXQiOjE3MDE5ODYyNzguNzk5NzY2LCJuYmYiOjE3MDE5ODYyNzguNzk5NzY5LCJleHAiOjE3MzM2MDg2NzguNzgyMjE3LCJzdWIiOiI1Iiwic2NvcGVzIjpbXX0.waB1tDS030LWB3piHSGqvI2rmqmFPRsFjR2xeBNGk5WdVWZtbzkNMyMCXmIS0wZmxO7jex7K3ooF26AVXs-j58A5zvnhnkifHXuayzmJpIql1RscOLaB0lfb-Qn3ZlMTirkDkz0vcpD-taaEPmcKS2pWElkQOpCqoULuCSAF_v6oTJRphGxgTbVl30H0lkGwe8-_HVYkeS-ePJU4Lupw4mim9PV_QB6R1neGE82LTLjU4dINr3yVDgjnf1NGCDQTe9NopBTjGM7y1TtGZa5aSChD2YUx4ixwuruEYEbE9jWOF0xzx8Sbo7TvIz4a9rtKKEvaZM_WNjbM98lkQB_dq2XHSyU-yNSJIsna7JHKYAW2FEskV3iKK1N224upPZfXT5tCgcoNOhqHhujj-h2tjBaDaO2-OxunDePW68Il447GAlsIiiP0xxHKphM0hBADxjrgdtG6aFrDmE8GSIMnK5g4-X-Z0HbUJy7U8sglDP9A2oHZJNywx9haPHCFleIXeew_xZNtnyECZdd-cGDSYDNkf2zO1eFPFU7LbHGdQL1xpDdFDyCgAlO7fZnSpWN0f8Zhs0OC6nijjRkZbpQKnfjFZqMMqOuMg56pDKmy6DqOFPN56g0tUH0DV3cCxUe67BjSu_gaO63r_sPRn6-YRHCDzeYuknfP2EedHN1-YKM'),
+          lang: 'en',
+          token: tokenVar!,
+        ),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             dynamic temp = snapshot.data;
@@ -67,6 +68,7 @@ class _OrderCategoryState extends State<OrderCategory> {
                                 child: Center(
                                   child: Container(
                                     margin: const EdgeInsets.only(top: 10),
+                                    padding: const EdgeInsets.only(right: 0),
                                     width: 360,
                                     height: 260,
                                     decoration: const BoxDecoration(
@@ -78,8 +80,9 @@ class _OrderCategoryState extends State<OrderCategory> {
                                       children: [
                                         //1
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 10),
+                                          padding: const EdgeInsets.only(
+                                            top: 10,
+                                          ),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceAround,
@@ -94,42 +97,52 @@ class _OrderCategoryState extends State<OrderCategory> {
                                                         FontWeight.w300),
                                               ),
                                               //Date
-                                              Row(
-                                                children: [
-                                                  const Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 20),
-                                                    child: Icon(
-                                                      Icons.calendar_month,
-                                                      size: 40,
-                                                      color: Color(0xff013A71),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 20),
+                                                child: Row(
+                                                  children: [
+                                                    const Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 0),
+                                                      child: Icon(
+                                                        Icons.calendar_month,
+                                                        size: 40,
+                                                        color:
+                                                            Color(0xff013A71),
+                                                      ),
                                                     ),
-                                                  ),
-                                                  const Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 10),
-                                                    child: Text(
-                                                      'Date:',
-                                                      style: TextStyle(
-                                                        fontSize: 22,
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 0),
+                                                      child: Text(
+                                                        'date'.tr,
+                                                        style: const TextStyle(
+                                                          fontSize: 22,
+                                                          fontFamily:
+                                                              'Open Sans',
+                                                          color:
+                                                              Color(0xff013A71),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 120,
+                                                    ),
+                                                    Text(
+                                                      '${data[index].orderDate}',
+                                                      style: const TextStyle(
+                                                        fontSize: 16,
                                                         fontFamily: 'Open Sans',
                                                         color:
                                                             Color(0xff013A71),
                                                       ),
                                                     ),
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 130,
-                                                  ),
-                                                  Text(
-                                                    '${data[index].orderDate}',
-                                                    style: const TextStyle(
-                                                      fontSize: 16,
-                                                      fontFamily: 'Open Sans',
-                                                      color: Color(0xff013A71),
-                                                    ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               )
                                             ],
                                           ),
@@ -145,52 +158,64 @@ class _OrderCategoryState extends State<OrderCategory> {
                                         //3
                                         Column(
                                           children: [
-                                            Container(
-                                              margin: const EdgeInsets.only(
-                                                  left: 20, top: 10),
-                                              height: 50,
-                                              alignment: Alignment.centerLeft,
-                                              child: Row(
-                                                children: [
-                                                  const Icon(
-                                                    Icons.star,
-                                                    size: 40,
-                                                    color: Color(0xff013A71),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 10),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        const Text(
-                                                          'Order Status',
-                                                          style: TextStyle(
-                                                            fontSize: 18,
-                                                            fontFamily:
-                                                                'Open Sans',
-                                                            color: Color(
-                                                                0xff013A71),
-                                                          ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 20),
+                                              child: Container(
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 0),
+                                                height: 50,
+                                                alignment: Alignment.centerLeft,
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(horizontal: 0),
+                                                  child: Row(
+                                                    children: [
+                                                      const Icon(
+                                                        Icons.star,
+                                                        size: 40,
+                                                        color:
+                                                            Color(0xff013A71),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 0),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              'orderStatus'.tr,
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 18,
+                                                                fontFamily:
+                                                                    'Open Sans',
+                                                                color: Color(
+                                                                    0xff013A71),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              '${data[index].orderStatus}',
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 14,
+                                                                fontFamily:
+                                                                    'Open Sans',
+                                                                color: Color(
+                                                                    0xff013a71),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        Text(
-                                                          '${data[index].orderStatus}',
-                                                          style:
-                                                              const TextStyle(
-                                                            fontSize: 14,
-                                                            fontFamily:
-                                                                'Open Sans',
-                                                            color: Color(
-                                                                0xff013a71),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -206,7 +231,7 @@ class _OrderCategoryState extends State<OrderCategory> {
                                         //5
                                         Container(
                                           margin: const EdgeInsets.only(
-                                              left: 20, top: 10),
+                                              left: 10, top: 10, right: 10),
                                           height: 50,
                                           alignment: Alignment.centerLeft,
                                           child: Row(
@@ -226,8 +251,8 @@ class _OrderCategoryState extends State<OrderCategory> {
                                                 child: Text(
                                                   '${data[index].payedStatus}' ==
                                                           0
-                                                      ? "Unpayed"
-                                                      : 'Payed',
+                                                      ? "unpayed".tr
+                                                      : "payed".tr,
                                                   style: const TextStyle(
                                                       fontSize: 14,
                                                       fontFamily: 'Open Sans',
@@ -252,20 +277,20 @@ class _OrderCategoryState extends State<OrderCategory> {
                                                 icon: Icon(
                                                   size: 24,
                                                   Icons.delete,
-                                                  color:
-                                                      '${data[index].orderStatus}' ==
-                                                              'in_preparation'
-                                                          ? Color(0xffF44438)
-                                                          : Color(0xff686868),
+                                                  color: data[index]
+                                                              .orderStatus ==
+                                                          'in_preparation'
+                                                      ? const Color(0xffF44438)
+                                                      : const Color(0xff686868),
                                                 ),
                                               ),
 
                                               //Price
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    right: 20),
+                                                    right: 0),
                                                 child: Text(
-                                                  '${data[index].price}',
+                                                  '${data[index].price} S.P',
                                                   style: const TextStyle(
                                                     fontSize: 16,
                                                     fontFamily: 'Open Sans',
@@ -285,14 +310,14 @@ class _OrderCategoryState extends State<OrderCategory> {
                       ),
                     ),
                   )
-                : const CustomScrollView(
+                : CustomScrollView(
                     slivers: [
                       SliverFillRemaining(
                         hasScrollBody: false,
                         child: Center(
                           child: Text(
-                            'There is no orders yet',
-                            style: TextStyle(
+                            "noOrder".tr,
+                            style: const TextStyle(
                                 fontSize: 24,
                                 color: Color(0xff003A71),
                                 fontFamily: 'Open Sans',
@@ -315,6 +340,7 @@ class _OrderCategoryState extends State<OrderCategory> {
         });
   }
 
+//=========================================================================SHOW Dialog=====================================================================
   //FUNCTION to conferm delete
   Future<void> showDeleteConfirmationDialog(
       BuildContext context, int id) async {
@@ -322,37 +348,36 @@ class _OrderCategoryState extends State<OrderCategory> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Column(
+          title: Column(
             children: [
-              Icon(
+              const Icon(
                 Icons.warning_amber,
                 color: Colors.red,
                 size: 40,
-              ), // Add your desired icon
-              SizedBox(width: 8.0),
-              Text('Delete Confirmation'),
+              ),
+              const SizedBox(width: 8.0),
+              Text("deleteTitle".tr),
             ],
           ),
-          content: Text('Are you sure you want to delete item $id?'),
+          content:
+              Text("deleteConfirmation".tr + " $id " + "quistionLetter".tr),
           actions: <Widget>[
             TextButton(
-              child: const Text('Cancel'),
+              child: Text('cancel'.tr),
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
               },
             ),
             TextButton(
-              child: const Text(
-                'Delete',
-                style: TextStyle(color: Color(0xffF44438)),
+              child: Text(
+                "delete".tr,
+                style: const TextStyle(color: Color(0xffF44438)),
               ),
               onPressed: () {
-                // Perform the delete operation
                 setState(() {
                   DeleteOrderService().deleteOrder(
                     orderId: id,
-                    token:
-                        'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5IiwianRpIjoiMjAxNTJkN2ExYjZjZWYyOWM2MjZhMjhhYmU1ZWFkMjg3ODY5MjIwY2U4OWFlOTVlYmI3MDhiZWRmZDIwMmUxNWVmNTNlZjg5YmRlZDRjNTkiLCJpYXQiOjE3MDE5ODYyNzguNzk5NzY2LCJuYmYiOjE3MDE5ODYyNzguNzk5NzY5LCJleHAiOjE3MzM2MDg2NzguNzgyMjE3LCJzdWIiOiI1Iiwic2NvcGVzIjpbXX0.waB1tDS030LWB3piHSGqvI2rmqmFPRsFjR2xeBNGk5WdVWZtbzkNMyMCXmIS0wZmxO7jex7K3ooF26AVXs-j58A5zvnhnkifHXuayzmJpIql1RscOLaB0lfb-Qn3ZlMTirkDkz0vcpD-taaEPmcKS2pWElkQOpCqoULuCSAF_v6oTJRphGxgTbVl30H0lkGwe8-_HVYkeS-ePJU4Lupw4mim9PV_QB6R1neGE82LTLjU4dINr3yVDgjnf1NGCDQTe9NopBTjGM7y1TtGZa5aSChD2YUx4ixwuruEYEbE9jWOF0xzx8Sbo7TvIz4a9rtKKEvaZM_WNjbM98lkQB_dq2XHSyU-yNSJIsna7JHKYAW2FEskV3iKK1N224upPZfXT5tCgcoNOhqHhujj-h2tjBaDaO2-OxunDePW68Il447GAlsIiiP0xxHKphM0hBADxjrgdtG6aFrDmE8GSIMnK5g4-X-Z0HbUJy7U8sglDP9A2oHZJNywx9haPHCFleIXeew_xZNtnyECZdd-cGDSYDNkf2zO1eFPFU7LbHGdQL1xpDdFDyCgAlO7fZnSpWN0f8Zhs0OC6nijjRkZbpQKnfjFZqMMqOuMg56pDKmy6DqOFPN56g0tUH0DV3cCxUe67BjSu_gaO63r_sPRn6-YRHCDzeYuknfP2EedHN1-YKM',
+                    token: tokenVar!,
                   );
                 });
 
@@ -365,8 +390,3 @@ class _OrderCategoryState extends State<OrderCategory> {
     );
   }
 }
-
-
-
-// Implement your delete logic here
-

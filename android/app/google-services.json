@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1012773932361",
+    "project_id": "pillpal-62e01",
+    "storage_bucket": "pillpal-62e01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012773932361:android:d5cabd36470e03d09c9e98",
+        "android_client_info": {
+          "package_name": "com.example.pharmacist_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1Hy5jB17nu18rst0GXg9VtxJRlaGZ05Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

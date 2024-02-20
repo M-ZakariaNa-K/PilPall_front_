@@ -1,11 +1,11 @@
-import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+import 'package:pharmacist_app/helper/varibles.dart';
 
 class DeleteOrderService {
   Future<void> deleteOrder(
       {required int orderId, required String token}) async {
-    final url =
-        Uri.parse('http://10.0.2.2:8000/api/orders/delete?order_id=$orderId');
+    final url = Uri.parse('$projectUrlVar/api/orders/delete?order_id=$orderId');
 
     try {
       final response =

@@ -1,97 +1,113 @@
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:pharmacist_app/helper/varibles.dart';
+import 'package:pharmacist_app/widgets/showDialog.dart';
+import 'package:flutter/material.dart';
 
-class Api {
-  //GET
-  Future<dynamic> get({required String url, required String? token}) async {
-    //if (http://127.0.0.1:8000) not work use (http://10.0.2.2:8000)
-    http.Response response = await http.get(
-      Uri.parse(url),
-      headers: token != null
-          ? {
-              'Authorization': 'Bearer $token',
-              'Content-Type': 'application/json'
-            }
-          : {'Content-Type': 'application/json'},
-    );
-
-    var data = json.decode(response.body);
-    //dyn amic data= json.decode(response.body);
-    // return response.body;
+class api {
+  Future<dynamic> get({required String url, @required int? Str}) async {
+    http.Response response = await http.get(Uri.parse(url), headers: {
+      'Str': "${strVar}",
+      // '$strVar',
+      'App-Local': '$langVar',
+      'Accept': 'application/json',
+      // 'Authorization': 'Bearer ${box.read('token')}',
+      'Authorization': 'Bearer $tokenVar'
+    });
 
     if (response.statusCode == 200) {
-      return data;
+      return jsonDecode(response.body);
     } else {
       throw Exception(
           'there is a problem with status code ${response.statusCode}');
     }
   }
 
-//Post
-  Future<dynamic> post(
-      {required String url,
-      @required dynamic body,
-      required String? token}) async {
-    Map<String, String> headers = {};
-    if (token != null) {
-      headers.addAll({
-        'Authorization': 'Bearer $token',
+  Future<dynamic> post({
+    @required BuildContext? context,
+    @required String? message,
+    @required String? message1,
+    required String url,
+    @required dynamic body,
+    @required int? Str,
+  }) async {
+    dynamic box = GetStorage();
+    Map<String, String> headrers = {};
+
+    if (box.read('token') != null) {
+      headrers.addAll({
+        //'Authorization': 'Bearer ${box.read('token')}',
+        'Authorization': 'Bearer $tokenVar',
+        'Str': "$strVar",
       });
     }
     http.Response response = await http.post(
       Uri.parse(url),
       body: body,
-      headers: headers,
+      headers: headrers,
     );
-    print('zzzzzzz:' + response.body);
-    if (response.statusCode == 200) {
+
+    if (response.statusCode == 201 || response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
       return data;
+    } else if (response.statusCode == 422) {
+      // ignore: use_build_context_synchronously
+      showDialog<String>(
+        context: context!,
+        builder: (BuildContext context) => Dialog(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset('assets/images/Logo.jpg', width: 70, height: 70),
+                Text(message!),
+                const SizedBox(height: 15),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Close'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+      // {"user id": 0, "token": ''};
+      // Future.value({'error':""});
+    } else if (response.statusCode == 401) {
+      showDialog<String>(
+        context: context!,
+        builder: (BuildContext context) => Dialog(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset('assets/images/Logo.jpg', width: 70, height: 70),
+                Text(message1!),
+                const SizedBox(height: 15),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Close'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+      // return {"user id": 0, "token": ''};
+      // Future.value({'error':""});;
     } else {
       throw Exception(
-          'there is a problem with status code ${response.statusCode} with body ${jsonDecode(response.body)}');
+          'There is a problem with status code ${response.statusCode} with body ${jsonDecode(response.body)}');
     }
-    //to return the message in API just write : <<<<<jsonDecode(response.body)>>>> in exception
   }
-
-  //Delete
-//   delete({required var url1, required String token, required int orderId}) async {
-//     var url = Uri.parse(url1);
-//     var response =
-//         await http.delete(url, headers: {'Authorization': 'Barer $token'});
-//     if (response.statusCode == 200) {
-//       print('Order deleted successfully');
-//     } else {
-//       print('Failed to delete order. Status Code: ${response.statusCode}');
-//       print('Response Body: ${response.body}');
-//     }
-//     //i call it in onPressed the Cansel button
-//   }
 }
-
-//                 TO Save TOOKEN
-// _save(String token) async {
-//   final SharedPreferences prefs = await SharedPreferences.getInstance();
-//   final key = 'token';
-//   final value = token;
-//   prefs.setString(key, value);
-// }
-
-// read() async {
-//   final SharedPreferences prefs = await SharedPreferences.getInstance();
-//   final key = 'token';
-//   final value = prefs.get(key) ?? 0;
-//   print('read : $value');
-// }
-
-// Future<bool> setToken(String value) async {
-//   final SharedPreferences prefs = await SharedPreferences.getInstance();
-//   return prefs.setString('token', value);
-// }
-
-// Future<String?> getToken() async {
-//   final SharedPreferences prefs = await SharedPreferences.getInstance();
-//   return prefs.getString('token');
-// }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pharmacist_app/helper/varibles.dart';
 import 'package:pharmacist_app/widgets/order_category.dart';
 
 class OrderPage extends StatelessWidget {
@@ -12,13 +13,14 @@ class OrderPage extends StatelessWidget {
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
+        
           },
           icon: const Icon(Icons.arrow_back_ios_new_sharp),
         ),
         backgroundColor: const Color(0xff88BFDD),
-        title: const Text('My Orders'),
+        title: Text('appParOrder'.tr),
       ),
-      body:const  Padding(
+      body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.0),
         child: OrderCategory(),
       ),

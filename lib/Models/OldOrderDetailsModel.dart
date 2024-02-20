@@ -11,7 +11,7 @@ class OldOrderDetailsModel {
   final String orderDate;
   final int payedStatus;
   final String orderStatus;
-  final String price;
+  final num price;
   final List<Medicine> medicines;
   const OldOrderDetailsModel({
     required this.id,
@@ -22,8 +22,7 @@ class OldOrderDetailsModel {
     required this.price,
     required this.medicines,
   });
-  factory OldOrderDetailsModel.fromJson(Map<String,dynamic> jsonData) {
-  
+  factory OldOrderDetailsModel.fromJson(Map<String, dynamic> jsonData) {
     return OldOrderDetailsModel(
       id: jsonData["id"],
       orderDate: jsonData["order date"],
@@ -32,26 +31,6 @@ class OldOrderDetailsModel {
       orderStatus: jsonData["status"],
       userId: jsonData["user id"],
       medicines: jsonData['medicines'],
-    );
-  }
-
-  OldOrderDetailsModel copyWith({
-    int? id,
-    int? userId,
-    String? orderDate,
-    int? payedStatus,
-    String? orderStatus,
-    String? price,
-    List<Medicine>? medicines,
-  }) {
-    return OldOrderDetailsModel(
-      id: id ?? this.id,
-      userId: userId ?? this.userId,
-      orderDate: orderDate ?? this.orderDate,
-      payedStatus: payedStatus ?? this.payedStatus,
-      orderStatus: orderStatus ?? this.orderStatus,
-      price: price ?? this.price,
-      medicines: medicines ?? this.medicines,
     );
   }
 
@@ -74,8 +53,12 @@ class OldOrderDetailsModel {
       orderDate: map['orderDate'] as String,
       payedStatus: map['payedStatus'] as int,
       orderStatus: map['orderStatus'] as String,
-      price: map['price'] as String,
-      medicines: List<Medicine>.from((map['medicines'] as List<int>).map<Medicine>((x) => Medicine.fromMap(x as Map<String,dynamic>),),),
+      price: map['price'] as num,
+      medicines: List<Medicine>.from(
+        (map['medicines'] as List<int>).map<Medicine>(
+          (x) => Medicine.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
     );
   }
 
@@ -109,7 +92,6 @@ class OldOrderDetailsModel {
         price.hashCode ^
         medicines.hashCode;
   }
-
 }
 
 //________________________________________
@@ -117,7 +99,7 @@ class Medicine {
   final String commercialName;
   final String image;
   final int quantity;
-  final double quantityPrice;
+  final num quantityPrice;
 
   const Medicine({
     required this.commercialName,

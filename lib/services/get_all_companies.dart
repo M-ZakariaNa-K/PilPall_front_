@@ -1,12 +1,15 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:pharmacist_app/Models/get_companies_model.dart';
+import 'package:pharmacist_app/helper/varibles.dart';
 
 class AllCompaniesService {
-  Future<List<CompaniesModel>> getAllCompanies({required String? token}) async {
+  Future<List<CompaniesModel>> getAllCompanies(
+      {required String? token, required int str}) async {
     http.Response response = await http.get(
-        Uri.parse('http://10.0.2.2:8000/api/companies/list'),
-        headers: {"Authorization": 'Bearer $token'});
+        Uri.parse('$projectUrlVar/api/companies/list'),
+        headers: {"Authorization": 'Bearer $token', 'Str': '$strVar'});
+
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
       List<CompaniesModel> companyList = [];

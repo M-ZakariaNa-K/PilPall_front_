@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
 import 'package:pharmacist_app/controller/basketController.dart';
+import 'package:pharmacist_app/controller/medicineController.dart';
 
-class MyBinding implements Bindings{
+class MyBinding implements Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
-    Get.put(BasketController(),permanent: true);
+
+    Get.put(MedicineController(), permanent: true);
+    Get.put(BasketController(), permanent: true);
   }
-  
 }
+
